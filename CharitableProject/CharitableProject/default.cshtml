@@ -5,20 +5,25 @@
 <div>
     <div>
         <input class="form-control input-lg" id="Name" type="text" placeholder="Type your name">
-        <p id="helloResult" style="margin-top: 15px;font-size: large"></p>
+        <p id="helloResult" style="margin-top: 15px; font-size: large"></p>
     </div>
 </div>
+<script src="https://twitter.github.io/typeahead.js/releases/latest/typeahead.bundle.js"></script>
 <script>
-    $('#Name').keyup(function () {
-        var name = $('#Name').val();
-        if (name) {
-            $.getJSON('/hello/' + name)
-                .success(function (response) {
-                    $('#helloResult').html(response.Result);
-                });
-        } else {
-            $('#helloResult').html('');
+    var datasource = new Bloodhound({
+        datumTokenizer: Bloodhound.tokenizers.obj.whitespace('Charity_Legal_Name'),
+        queryTokenizer: Bloodhound.tokenizers.whitespace,
+        remote: {
+            url: '/find?Charity_legal_nameContains=$QUERY$',
+            wildcard: '$QUERY$'
         }
     });
+
+    $('#Name').typeahead(null, {
+        name: 'Charity_Legal_Name',
+        source: datasource.ttAdapter()
+
+    });
+
 </script>
 
