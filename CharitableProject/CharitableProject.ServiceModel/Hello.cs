@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using CharitableProject.ServiceModel.Types;
 using ServiceStack;
 
 namespace CharitableProject.ServiceModel
@@ -17,4 +18,7 @@ namespace CharitableProject.ServiceModel
     {
         public string Result { get; set; }
     }
+
+    [Route("/find")]
+    public class FindCharity : QueryBase<Charity> { }
 }
