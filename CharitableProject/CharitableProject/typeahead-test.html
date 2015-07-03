@@ -1,0 +1,44 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+</head>
+<body>
+
+<input type="text" id="search"/>
+    <div id="results"></div>
+    <script src="https://code.jquery.com/jquery-2.1.4.js"></script>
+    <!--<script src="https://twitter.github.io/typeahead.js/releases/latest/typeahead.bundle.js"></script>-->
+    <script>
+
+        //$('#search').typeahead(null, {
+        //    name: 'Charity_Legal_Name',
+        //    source: function (query, typeahead) {
+        //        return $.getJSON('/find', { Charity_legal_nameContains: query }, function (data) {
+        //            return (data.Results);
+        //        });
+        //    }
+        //});
+
+        //$('.typeahead').bind('typeahead:render', function (ev, suggestion) {
+        //    console.log(ev);
+        //});
+
+
+        var input = $("#search");
+
+        	
+        $(input).on("keyup", function() {
+            $.getJSON('/find', { Charity_legal_nameContains: this.value }, function(data) {
+                var list = [];
+                $.each(data.Results, function(k, v) {
+                    list.push(v.Charity_Legal_Name);
+                });
+                $('#results').text(JSON.stringify(list));
+            })
+        })
+
+    </script>
+
+</body>
+</html>
