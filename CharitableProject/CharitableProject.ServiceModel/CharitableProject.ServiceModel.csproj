@@ -45,7 +45,8 @@
   <ItemGroup>
     <Compile Include="Hello.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Types\CharityRow.cs" />
+    <Compile Include="Types\CharityMetadata.cs" />
+    <Compile Include="Types\Charity.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
