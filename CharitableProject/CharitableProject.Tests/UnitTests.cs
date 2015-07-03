@@ -1,9 +1,18 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Configuration;
+using System.Data;
+using System.IO;
+using System.Linq;
 using NUnit.Framework;
 using ServiceStack;
 using ServiceStack.Testing;
 using CharitableProject.ServiceModel;
 using CharitableProject.ServiceInterface;
+using CharitableProject.ServiceModel.Types;
+using ServiceStack.Data;
+using ServiceStack.OrmLite;
+using ServiceStack.Text;
 
 namespace CharitableProject.Tests
 {
@@ -19,6 +28,8 @@ namespace CharitableProject.Tests
                 ConfigureContainer = container =>
                 {
                     //Add your IoC dependencies here
+                    container.Register<IDbConnectionFactory>(new OrmLiteConnectionFactory("~/App_Data/db.sqlite",SqliteDialect.Provider));
+
                 }
             }
             .Init();
@@ -33,11 +44,28 @@ namespace CharitableProject.Tests
         [Test]
         public void TestMethod1()
         {
-            var service = appHost.Container.Resolve<MyServices>();
+            var dbConnectionFactory = appHost.Container.Resolve<IDbConnectionFactory>();
+            using (var db = dbConnectionFactory.OpenDbConnection())
+            {
+                db.DropAndCreateTable<Charity>();
+            }
+            using (var db = dbConnectionFactory.OpenDbConnection())
+            {
+                string currentPath = AppDomain.CurrentDomain.BaseDirectory;
 
-            var response = (HelloResponse)service.Any(new Hello { Name = "World" });
+                var filestream = File.OpenRead(Path.Combine(currentPath, ConfigurationManager.AppSettings["DataPath"]));
+                TextReader textreader = new StreamReader(filestream);
+                var reader = new CsvHelper.CsvReader(textreader);
 
-            Assert.That(response.Result, Is.EqualTo("Hello, World!"));
+                var lol = reader.GetRecords<dynamic>();
+
+                var charityJson = lol.ToJson();
+
+                var data = JsonSerializer.DeserializeFromString<List<Charity>>(charityJson);
+
+                db.InsertAll(data);
+
+            }
         }
     }
 }
