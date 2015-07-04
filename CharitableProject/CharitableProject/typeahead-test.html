@@ -80,7 +80,10 @@
     </style>
 </head>
 <body>
-    <div id="container"><input type="text" id="search" class="ui-widget" /></div>
+<div id="container">
+    <form><input type="text" id="search" class="ui-widget" /></form>
+    
+</div>
 
     <script src="https://code.jquery.com/jquery-2.1.4.js"></script>
     <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
@@ -92,13 +95,21 @@
                 $.getJSON('/find', { Charity_legal_nameContains: req.term }, function (data) {
                     var list = [];
                     $.each(data.Results, function (k, v) {
-                        list.push(v.Charity_Legal_Name);
+                        list.push({ "value": v.ABN, "label": v.Charity_Legal_Name });
                         if (v.Other_Organisation_Names !== undefined) {
-                            list.push(v.Other_Organisation_Names.split(','));
+                            var aliases = v.Other_Organisation_Names.split(',');
+                            for (var i = 0; i < aliases.length; i++) {
+                                list.push({ "value": v.ABN, "label": aliases[i] });
+                            }
                         }
                     });
                     res(list);
                 });
+            },
+            select: function (event, ui) {
+                $(this).val(ui.item.label);
+                window.location = '/charity/' + ui.item.value;
+                event.preventDefault();
             }
         });
 
