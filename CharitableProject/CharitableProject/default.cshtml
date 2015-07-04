@@ -1,29 +1,37 @@
 ﻿@inherits ViewPage
 @{
-    ViewBag.Title = "Hello World Service";
+    ViewBag.Title = "Find A Charity";
 }
-<div>
-    <div>
-        <input class="form-control input-lg" id="Name" type="text" placeholder="Type your name">
-        <p id="helloResult" style="margin-top: 15px; font-size: large"></p>
-    </div>
+
+<div id="container">
+    <form><input type="text" id="search" class="ui-widget" /></form>
 </div>
-<script src="https://twitter.github.io/typeahead.js/releases/latest/typeahead.bundle.js"></script>
+
+
 <script>
-    var datasource = new Bloodhound({
-        datumTokenizer: Bloodhound.tokenizers.obj.whitespace('Charity_Legal_Name'),
-        queryTokenizer: Bloodhound.tokenizers.whitespace,
-        remote: {
-            url: '/find?Charity_legal_nameContains=$QUERY$',
-            wildcard: '$QUERY$'
+    $("#search").autocomplete({
+        source: function (req, res) {
+            $.getJSON('/find', { Charity_legal_nameContains: req.term }, function (data) {
+                var list = [];
+                $.each(data.Results, function (k, v) {
+                    list.push({ "value": v.ABN, "label": v.Charity_Legal_Name });
+                    if (v.Other_Organisation_Names !== undefined) {
+                        var aliases = v.Other_Organisation_Names.split(',');
+                        for (var i = 0; i < aliases.length; i++) {
+                            list.push({ "value": v.ABN, "label": aliases[i] });
+                        }
+                    }
+                });
+                res(list);
+            });
+        },
+        select: function (event, ui) {
+            $(this).val(ui.item.label);
+            window.location = '/charity/' + ui.item.value;
+            event.preventDefault();
         }
     });
-
-    $('#Name').typeahead(null, {
-        name: 'Charity_Legal_Name',
-        source: datasource.ttAdapter()
-
-    });
-
 </script>
+
+
 
