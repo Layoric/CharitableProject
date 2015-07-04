@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.IO;
 using System.Linq;
 using System.Web;
 using Funq;
@@ -8,6 +9,7 @@ using ServiceStack;
 using ServiceStack.Razor;
 using CharitableProject.ServiceInterface;
 using CharitableProject.ServiceModel.Types;
+using ServiceStack.Configuration;
 using ServiceStack.Data;
 using ServiceStack.OrmLite;
 
@@ -22,7 +24,10 @@ namespace CharitableProject
         public AppHost()
             : base("CharitableProject", typeof(MyServices).Assembly)
         {
-
+            var customSettings = new FileInfo(@"~/appsettings.txt".MapHostAbsolutePath());
+            AppSettings = customSettings.Exists
+                ? (IAppSettings)new TextFileSettings(customSettings.FullName)
+                : new AppSettings();
         }
 
         /// <summary>
@@ -39,8 +44,8 @@ namespace CharitableProject
             this.Plugins.Add(new RazorFormat());
             this.Plugins.Add(new AutoQueryFeature { MaxLimit = 500 });
 
-            container.Register<IDbConnectionFactory>(new OrmLiteConnectionFactory("~/App_Data/db.sqlite".MapHostAbsolutePath(),
-                SqliteDialect.Provider));
+            container.Register<IDbConnectionFactory>(new OrmLiteConnectionFactory(AppSettings.GetString("connectionString"),
+                PostgreSqlDialect.Provider));
 
             var dbFactory = container.Resolve<IDbConnectionFactory>();
             //Assume data is loaded/sqlite file is present
