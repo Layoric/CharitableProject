@@ -3,12 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ServiceStack.DataAnnotations;
 
 namespace CharitableProject.ServiceModel.Types
 {
     public class Charity
     {
+        [AutoIncrement]
+        public int Id { get; set; }
+
+        [Index]
         public string ABN { get; set; }
+        [Index]
         public string Charity_Legal_Name { get; set; }
         public string Other_Organisation_Names { get; set; }
         public string Operating_Countries { get; set; }

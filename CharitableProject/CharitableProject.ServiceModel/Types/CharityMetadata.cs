@@ -1,8 +1,15 @@
-﻿namespace CharitableProject.ServiceModel.Types
+﻿using ServiceStack.DataAnnotations;
+
+namespace CharitableProject.ServiceModel.Types
 {
     public class CharityMetadata
     {
+        [AutoIncrement]
+        public int Id { get; set; }
+
+        [Index]
         public string ABN { get; set; }
+        [Index]
         public string Charity_Name { get; set; }
         public string Other_Organisation_Names { get; set; }
         public string Address_Type { get; set; }

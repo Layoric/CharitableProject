@@ -28,7 +28,7 @@ namespace CharitableProject.Tests
                 ConfigureContainer = container =>
                 {
                     //Add your IoC dependencies here
-                    container.Register<IDbConnectionFactory>(new OrmLiteConnectionFactory("~/App_Data/db.sqlite",SqliteDialect.Provider));
+                    container.Register<IDbConnectionFactory>(new OrmLiteConnectionFactory("~/App_Data/db.sqlite".MapHostAbsolutePath(),SqliteDialect.Provider));
 
                 }
             }
