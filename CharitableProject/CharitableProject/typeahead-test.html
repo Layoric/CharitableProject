@@ -2,41 +2,116 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <title></title>
+    <link rel="stylesheet" href="Content/jquery-ui.css" type="text/css">
+    <style type="text/css">
+        .ui-autocomplete {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            z-index: 1000;
+            float: left;
+            display: none;
+            min-width: 160px;
+            padding: 4px 0;
+            margin: 0 0 10px 25px;
+            list-style: none;
+            background-color: #ffffff;
+            border-color: #ccc;
+            border-color: rgba(0, 0, 0, 0.2);
+            border-style: solid;
+            border-width: 1px;
+            -webkit-border-radius: 5px;
+            -moz-border-radius: 5px;
+            border-radius: 5px;
+            -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+            -moz-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+            -webkit-background-clip: padding-box;
+            -moz-background-clip: padding;
+            background-clip: padding-box;
+            *border-right-width: 2px;
+            *border-bottom-width: 2px;
+        }
+
+        .ui-menu-item > a.ui-corner-all {
+            display: block;
+            padding: 3px 15px;
+            clear: both;
+            font-weight: normal;
+            line-height: 18px;
+            color: #555555;
+            white-space: nowrap;
+            text-decoration: none;
+        }
+
+        .ui-state-hover, .ui-state-active {
+            color: #ffffff;
+            text-decoration: none;
+            background-color: #0088cc;
+            border-radius: 0px;
+            -webkit-border-radius: 0px;
+            -moz-border-radius: 0px;
+            background-image: none;
+        }
+
+        .container {
+            position: relative;
+        }
+
+        input#search {
+            width: 300px;
+            height: 50px;
+            border: none;
+            font-size: 10pt;
+            float: left;
+            padding-left: 45px;
+            -webkit-border-radius: 5px;
+            -moz-border-radius: 5px;
+            border-radius: 5px;
+            border-color: black;
+            border: 2px solid;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+
+    </style>
 </head>
 <body>
+    <div id="container"><input type="text" id="search" class="ui-widget" /></div>
 
-<input type="text" id="search"/>
-    <div id="results"></div>
     <script src="https://code.jquery.com/jquery-2.1.4.js"></script>
-    <!--<script src="https://twitter.github.io/typeahead.js/releases/latest/typeahead.bundle.js"></script>-->
+    <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
     <script>
 
-        //$('#search').typeahead(null, {
-        //    name: 'Charity_Legal_Name',
-        //    source: function (query, typeahead) {
-        //        return $.getJSON('/find', { Charity_legal_nameContains: query }, function (data) {
-        //            return (data.Results);
-        //        });
-        //    }
-        //});
 
-        //$('.typeahead').bind('typeahead:render', function (ev, suggestion) {
-        //    console.log(ev);
-        //});
-
-
-        var input = $("#search");
-
-        	
-        $(input).on("keyup", function() {
-            $.getJSON('/find', { Charity_legal_nameContains: this.value }, function(data) {
-                var list = [];
-                $.each(data.Results, function(k, v) {
-                    list.push(v.Charity_Legal_Name);
+        $("#search").autocomplete({
+            source: function (req, res) {
+                $.getJSON('/find', { Charity_legal_nameContains: req.term }, function (data) {
+                    var list = [];
+                    $.each(data.Results, function (k, v) {
+                        list.push(v.Charity_Legal_Name);
+                        if (v.Other_Organisation_Names !== undefined) {
+                            list.push(v.Other_Organisation_Names.split(','));
+                        }
+                    });
+                    res(list);
                 });
-                $('#results').text(JSON.stringify(list));
-            })
-        })
+            }
+        });
+
+
+        //$(input).on("keyup", function () {
+        //    $.getJSON('/find', { Charity_legal_nameContains: this.value }, function (data) {
+        //        var list = [];
+        //        $.each(data.Results, function (k, v) {
+        //            list.push(v.Charity_Legal_Name);
+        //        });
+        //        $('#results').text(JSON.stringify(list));
+        //    })
+        //})
 
     </script>
 
