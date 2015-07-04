@@ -15,15 +15,18 @@
             $.getJSON('/find', { Charity_NameContains: req.term }, function (data) {
                 var list = [];
                 $.each(data.Results, function (k, v) {
-                    list.push({ "value": v.ABN, "label": v.Charity_Name });
+                    list.push({ "value": v.Charity_Name, "label": v.Charity_Name, "ABN":v.ABN });
                 });
                 res(list);
             });
         },
         select: function (event, ui) {
             $(this).val(ui.item.label);
-            window.location = '/charity/' + ui.item.value;
+            window.location = '/charity/' + ui.item.ABN;
             event.preventDefault();
+        },
+        focus: function(event, ui) {
+            $(this).val(ui.item.label);
         }
     });
 </script>
