@@ -16,12 +16,12 @@ using ServiceStack.Text;
 
 namespace CharitableProject.Tests
 {
-    [TestFixture]
-    public class UnitTests
+    [NUnit.Framework.Ignore("One-off Admin Tasks")]
+    public class AdminTasks
     {
         private readonly ServiceStackHost appHost;
 
-        public UnitTests()
+        public AdminTasks()
         {
             appHost = new BasicAppHost(typeof(MyServices).Assembly)
             {
