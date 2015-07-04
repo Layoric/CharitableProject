@@ -28,6 +28,114 @@
                 <td>@Model.Metadata.Main_Activity</td>
             </tr>
         </table>
+
+        <table class="table table-striped table-bordered">
+            <thead>Operates in States</thead>
+            <tr>
+                <td>ACT</td>
+                <td>
+                    @if (@Model.Metadata.Operates_in_ACT == "Y")
+                    {
+                        <span>✔</span>
+                    }
+                    else
+                    {
+                        <span>✗</span>
+                    }
+                </td>
+            </tr>
+            <tr>
+                <td>NSW</td>
+                <td>
+                    @if (@Model.Metadata.Operates_in_NSW == "Y")
+                    {
+                        <span>✔</span>
+                    }
+                    else
+                    {
+                        <span>✗</span>
+                    }
+                </td>
+            </tr>
+            <tr>
+                <td>VIC</td>
+                <td>
+                    @if (@Model.Metadata.Operates_in_VIC == "Y")
+                    {
+                        <span>✔</span>
+                    }
+                    else
+                    {
+                        <span>✗</span>
+                    }
+                </td>
+            </tr>
+            <tr>
+                <td>QLD</td>
+                <td>
+                    @if (@Model.Metadata.Operates_in_QLD == "Y")
+                    {
+                        <span>✔</span>
+                    }
+                    else
+                    {
+                        <span>✗</span>
+                    }
+                </td>
+            </tr>
+            <tr>
+                <td>SA</td>
+                <td>
+                    @if (@Model.Metadata.Operates_in_SA == "Y")
+                    {
+                        <span>✔</span>
+                    }
+                    else
+                    {
+                        <span>✗</span>
+                    }
+                </td>
+            </tr>
+            <tr>
+                <td>WA</td>
+                <td>
+                    @if (@Model.Metadata.Operates_in_WA == "Y")
+                    {
+                        <span>✔</span>
+                    }
+                    else
+                    {
+                        <span>✗</span>
+                    }
+                </td>
+            </tr>
+            <tr>
+                <td>NT</td>
+                <td>
+                    @if (@Model.Metadata.Operates_in_NT == "Y")
+                    {
+                        <span>✔</span>
+                    }
+                    else
+                    {
+                        <span>✗</span>
+                    }
+                </td>
+            </tr>
+            <tr>
+                <td>TAS</td>
+                <td>
+                    @if (@Model.Metadata.Operates_in_TAS == "Y")
+                    {
+                        <span>✔</span>
+                    }
+                    else
+                    {
+                        <span>✗</span>
+                    }
+                </td>
+            </tr>
+        </table>
     </div>
 </div>
 <div>
@@ -81,6 +189,13 @@
                 <td class="success"><img src="https://upload.wikimedia.org/wikipedia/en/thumb/3/3f/Australian_Aboriginal_Flag.svg/320px-Australian_Aboriginal_Flag.svg.png" width="32" height="22"/></td>
             </tr>
         }
-
+        @if (@Model.Metadata.Emergency_Relief == "Y")
+        {
+            <tr>
+                <td>Emergency relief</td>
+                <td class="success"><span class="glyphicon glyphicon-plus-sign"></span></td>
+            </tr>
+        }
+        
     </table>
 </div>
