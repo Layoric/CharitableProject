@@ -34,14 +34,42 @@
         {
             <tr>
                 <td>Supports LGBT</td>
-                <td class="success"><i>💗</i></td>
+                <td class="success"><i style="font-size: large">🌈</i></td>
             </tr>
         }
         @if (@Model.Result.Women == "Y")
         {
             <tr>
                 <td>Supports Women</td>
-                <td class="success"><i>💗</i></td>
+                <td class="success"><i style="font-size: large">♀</i></td>
+            </tr>
+        }
+        @if (@Model.Metadata.Animal_Protection == "Y")
+        {
+            <tr>
+                <td>Supports Animal Protection</td>
+                <td class="success"><i style="font-size: large">🐶</i></td>
+            </tr>
+        }
+        @if (@Model.Metadata.People_at_risk_of_homelessness == "Y")
+        {
+            <tr>
+                <td>Homelessness prevention</td>
+                <td class="success"><i style="font-size: large">🏠</i></td>
+            </tr>
+        }
+        @if (@Model.Metadata.Environmental_activities == "Y")
+        {
+            <tr>
+                <td>Environmental activities</td>
+                <td class="success"><i style="font-size: large">🌲</i></td>
+            </tr>
+        }
+        @if (@Model.Metadata.Income_support_and_maintenance == "Y")
+        {
+            <tr>
+                <td>Income support</td>
+                <td class="success"><i style="font-size: large">💰</i></td>
             </tr>
         }
     </table>
