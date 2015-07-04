@@ -19,6 +19,21 @@ namespace CharitableProject.ServiceModel
         public string Result { get; set; }
     }
 
+    [Route("/charity/{ABN}")]
+    public class GetCharityWithMetadata : IReturn<GetCharityWithMetadataResponse>
+    {
+        public string ABN { get; set; }
+    }
+
+    public class GetCharityWithMetadataResponse
+    {
+        public CharityMetadata Metadata { get; set; }
+        public Charity Result { get; set; }
+    }
+
     [Route("/find")]
-    public class FindCharity : QueryBase<Charity> { }
+    public class FindCharity : QueryBase<Charity>//, IJoin<Charity,CharityMetadata>
+    {
+        public string Name { get; set; }
+    }
 }

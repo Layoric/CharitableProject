@@ -29,7 +29,7 @@ namespace CharitableProject.ServiceModel.Types
         public string Operates_in_TAS { get; set; }
         public string Operates_in_VIC { get; set; }
         public string Operates_in_WA { get; set; }
-        public string Relief_of_poverty__sickness_or_the_needs_of_the_aged { get; set; }
+        public string Relief_of_poverty_sickness_or_the_needs_of_the_aged { get; set; }
         public string The_advancement_of_education { get; set; }
         public string The_advancement_of_religion { get; set; }
         public string The_provision_of_child_care_services { get; set; }
@@ -41,7 +41,7 @@ namespace CharitableProject.ServiceModel.Types
         public string Aged_Care_Activities { get; set; }
         public string Civic_and_advocacy_activities { get; set; }
         public string Culture_and_arts { get; set; }
-        public string Economic__social_and_community_development { get; set; }
+        public string Economic_social_and_community_development { get; set; }
         public string Emergency_Relief { get; set; }
         public string Employment_and_training { get; set; }
         public string Environmental_activities { get; set; }
@@ -65,8 +65,8 @@ namespace CharitableProject.ServiceModel.Types
         public string Other { get; set; }
         public string Other_activity_description { get; set; }
         public string How_purposes_were_pursued { get; set; }
-        public string Will_purposes_change_in_the_next_financial_year_ { get; set; }
-        public string Description_of_purposes_change__if_applicable_ { get; set; }
+        public string Will_purposes_change_in_the_next_financial_year { get; set; }
+        public string Description_of_purposes_change_if_applicable { get; set; }
         public string Charity_Size { get; set; }
         public string Financial_Year_End { get; set; }
         public string Aboriginal_or_TSI { get; set; }
@@ -74,10 +74,10 @@ namespace CharitableProject.ServiceModel.Types
         public string Children { get; set; }
         public string Communities_Overseas { get; set; }
         public string Ethnic_Groups { get; set; }
-        public string Gay__Lesbian__Bisexual { get; set; }
+        public string Gay_Lesbian_Bisexual { get; set; }
         public string General_Community_in_Australia { get; set; }
         public string Men { get; set; }
-        public string Migrants__Refugees_or_Asylum_Seekers { get; set; }
+        public string Migrants_Refugees_or_Asylum_Seekers { get; set; }
         public string Pre_Post_Release_Offenders { get; set; }
         public string People_with_Chronic_Illness { get; set; }
         public string People_with_Disabilities { get; set; }
@@ -91,23 +91,23 @@ namespace CharitableProject.ServiceModel.Types
         public string Other_charities { get; set; }
         public string Other_beneficiaries_not_listed { get; set; }
         public string Other_beneficiaries_description { get; set; }
-        public string Staff___Full_time { get; set; }
-        public string Staff___Part_time { get; set; }
-        public string Staff___Volunteers { get; set; }
+        public string Staff_Full_time { get; set; }
+        public string Staff_Part_time { get; set; }
+        public string Staff_Volunteers { get; set; }
         public string Other_Commonwealth_Agency_Reporting_Obligations { get; set; }
-        public string OTHER_Regulator_details__if_selected_ { get; set; }
+        public string OTHER_Regulator_details_if_selected { get; set; }
         public string Reporting_Program_details { get; set; }
-        public string Reporting_Obligations___ACT { get; set; }
-        public string Reporting_Obligations___NSW { get; set; }
-        public string Reporting_Obligations___NT { get; set; }
-        public string Reporting_Obligations___QLD { get; set; }
-        public string Reporting_Obligations___SA { get; set; }
-        public string Reporting_Obligations___TAS { get; set; }
-        public string Reporting_Obligations___VIC { get; set; }
-        public string Reporting_Obligations___WA { get; set; }
-        public string Reporting_hours___Paid { get; set; }
-        public string Reporting_hours___Unpaid { get; set; }
-        public string Reporting_hours___Total { get; set; }
+        public string Reporting_Obligations_ACT { get; set; }
+        public string Reporting_Obligations_NSW { get; set; }
+        public string Reporting_Obligations_NT { get; set; }
+        public string Reporting_Obligations_QLD { get; set; }
+        public string Reporting_Obligations_SA { get; set; }
+        public string Reporting_Obligations_TAS { get; set; }
+        public string Reporting_Obligations_VIC { get; set; }
+        public string Reporting_Obligations_WA { get; set; }
+        public string Reporting_hours_Paid { get; set; }
+        public string Reporting_hours_Unpaid { get; set; }
+        public string Reporting_hours_Total { get; set; }
 
     }
 }

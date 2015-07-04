@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using CharitableProject.ServiceInterface;
+using CharitableProject.ServiceModel;
 using CharitableProject.ServiceModel.Types;
 using NUnit.Framework;
 using ServiceStack;

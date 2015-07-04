@@ -29,7 +29,7 @@ namespace CharitableProject.Tests
                 {
                     //Add your IoC dependencies here
                     container.Register<IDbConnectionFactory>(new OrmLiteConnectionFactory("~/App_Data/db.sqlite".MapHostAbsolutePath(),SqliteDialect.Provider));
-
+                    
                 }
             }
             .Init();

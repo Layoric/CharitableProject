@@ -12,6 +12,8 @@ namespace CharitableProject.ServiceInterface
 {
     public class MyServices : Service
     {
+        public IAutoQuery AutoQuery { get; set; }
+
         public object Any(Hello request)
         {
             return new HelloResponse { Result = "Hello, {0}!".Fmt(request.Name) };
@@ -21,18 +23,16 @@ namespace CharitableProject.ServiceInterface
         {
             return new GetCharityWithMetadataResponse
             {
-                Result = Db.Single<CharityMetadata>(x => x.ABN == request.ABN)
+                Metadata = Db.Single<CharityMetadata>(x => x.ABN == request.ABN),
+                Result = Db.Single<Charity>(x => x.ABN == request.ABN)
             };
         }
-    }
 
-    public class GetCharityWithMetadata : IReturn<GetCharityWithMetadataResponse>
-    {
-        public string ABN { get; set; }
-    }
-
-    public class GetCharityWithMetadataResponse
-    {
-        public CharityMetadata Result { get; set; }
+        //Auto query
+        public object Get(FindCharity request)
+        {
+            var q = AutoQuery.CreateQuery(request, Request.GetRequestParams());
+            return AutoQuery.Execute(request, q);
+        }
     }
 }
