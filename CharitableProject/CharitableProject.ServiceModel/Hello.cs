@@ -32,7 +32,7 @@ namespace CharitableProject.ServiceModel
     }
 
     [Route("/find")]
-    public class FindCharity : QueryBase<Charity>//, IJoin<Charity,CharityMetadata>
+    public class FindCharity : QueryBase<CharityMetadata>//, IJoin<Charity,CharityMetadata>
     {
         public string Name { get; set; }
     }

@@ -42,7 +42,7 @@ namespace CharitableProject
             //this.Plugins.Add(new CorsFeature());
 
             this.Plugins.Add(new RazorFormat());
-            this.Plugins.Add(new AutoQueryFeature { MaxLimit = 500 });
+            this.Plugins.Add(new AutoQueryFeature { MaxLimit = 50 });
 
             container.Register<IDbConnectionFactory>(new OrmLiteConnectionFactory(AppSettings.GetString("connectionString"),
                 PostgreSqlDialect.Provider));

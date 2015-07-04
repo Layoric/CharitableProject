@@ -32,7 +32,21 @@ namespace CharitableProject.ServiceInterface
         public object Get(FindCharity request)
         {
             var q = AutoQuery.CreateQuery(request, Request.GetRequestParams());
-            return AutoQuery.Execute(request, q);
+            var result =  AutoQuery.Execute(request, q);
+            return new
+            {
+                Results = result.Results.Select(x =>
+                {
+                    var temp = x.ConvertTo<SearchResultCharityMetadata>();
+                    return temp;
+                })
+            };
         }
+    }
+
+    public class SearchResultCharityMetadata
+    {
+        public string ABN { get; set; }
+        public string Charity_Name { get; set; }
     }
 }
