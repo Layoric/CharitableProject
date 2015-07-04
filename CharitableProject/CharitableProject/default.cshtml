@@ -10,17 +10,12 @@
 
 <script>
     $("#search").autocomplete({
+        minLength: 2,
         source: function (req, res) {
-            $.getJSON('/find', { Charity_legal_nameContains: req.term }, function (data) {
+            $.getJSON('/find', { Charity_NameContains: req.term }, function (data) {
                 var list = [];
                 $.each(data.Results, function (k, v) {
-                    list.push({ "value": v.ABN, "label": v.Charity_Legal_Name });
-                    if (v.Other_Organisation_Names !== undefined) {
-                        var aliases = v.Other_Organisation_Names.split(',');
-                        for (var i = 0; i < aliases.length; i++) {
-                            list.push({ "value": v.ABN, "label": aliases[i] });
-                        }
-                    }
+                    list.push({ "value": v.ABN, "label": v.Charity_Name });
                 });
                 res(list);
             });
