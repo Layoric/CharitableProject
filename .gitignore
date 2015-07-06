@@ -198,3 +198,4 @@ FakesAssemblies/
 
 App_Data/*
 CharitableProject/CharitableProject/appsettings.txt
+CharitableProject/CharitableProject/App_Data/db.sqlite

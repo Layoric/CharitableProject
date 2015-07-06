@@ -33,14 +33,12 @@ namespace CharitableProject.ServiceInterface
         {
             var q = AutoQuery.CreateQuery(request, Request.GetRequestParams());
             var result =  AutoQuery.Execute(request, q);
-            return new
+            result.Results = result.Results.Select(x => new CharityMetadata
             {
-                Results = result.Results.Select(x =>
-                {
-                    var temp = x.ConvertTo<SearchResultCharityMetadata>();
-                    return temp;
-                })
-            };
+                Charity_Name = x.Charity_Name,
+                ABN = x.ABN
+            }).ToList();
+            return result;
         }
     }
 
